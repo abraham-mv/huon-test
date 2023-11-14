@@ -11,31 +11,18 @@ from datetime import datetime
 
 
 def meta(data: dict[Pages, bytes]) -> LobMeta:
-    breakpoint()
     main = data["result"][0]
-    html_content = data['result'][1].decode('utf-8')   
+    html_content = data['result'][1].decode('utf-8')
     soup = BeautifulSoup(html_content, 'html.parser')
     registration_tag = soup.find(string=lambda x: "Registration status:" in x)
-    if registration_tag:
-        next_strong = registration_tag.find_next('strong')
-        status = True if next_strong and "Active" in next_strong.get_text(strip=True) else False
-    else:
-        status = False
-
-    #START_DATE: also using BS
+    status = bool(registration_tag and "Active" in registration_tag.find_next('strong').get_text(strip=True))
+  
+    # Start Day
     initial_date_tag = soup.find(string=lambda x: "Initial registration start date:" in x)
+    next_strong = initial_date_tag.find_next('strong') if initial_date_tag else None
+    start_date = datetime.strptime(next_strong.get_text(strip=True), '%Y-%m-%d') if next_strong else None
 
-    if initial_date_tag:
-        next_strong = initial_date_tag.find_next('strong')
-        if next_strong:
-            date_string = next_strong.get_text(strip=True)
-            start_date = datetime.strptime(date_string, '%Y-%m-%d')
-        else:
-            start_date = None
-    else:
-        start_date = None
-
-    #RNUM
+    # RNUM
     registration_num_tag = soup.find(string=lambda x: "Registration Number:" in x)
 
     if registration_num_tag:
@@ -44,7 +31,7 @@ def meta(data: dict[Pages, bytes]) -> LobMeta:
     else:
         rnum = "SAMPLE_RNUM"
 
-    #END DATE: might have to go into the drop down list?
+#END DATE: might have to go into the drop down list?
     return LobMeta(
         rid=main.rid,
         s="fd",
@@ -58,28 +45,24 @@ def meta(data: dict[Pages, bytes]) -> LobMeta:
 
 
 def org(data: dict[Pages, bytes]) -> LobOrg:
+    # Improvements:
+    # Simplify regex matches. 
+    # You can simplify the regex matches by using a single pattern to match both "Client name" and "In-house Organization name".
     main = data["main"][0]
     html_content = data['main'][1].decode('utf-8')
-    match = re.search(r'Client name:\\r\\n\s*<strong>([^<]*)</strong>', html_content)
-    if not match:
-        match = re.search(r'In-house Organization name:\\r\\n\s*<strong>([^<]*)</strong>', html_content)
-    if match:
-        name = match.group(1).replace('\\r\\n', '').strip()
-    else:
-        name = "Not found"
+    match = re.search(r'(Client name|In-house Organization name):\\r\\n\s*<strong>([^<]*)</strong>', html_content)
+    name = match.group(1).replace('\\r\\n', '').strip() if match else "Not found"
     return LobOrg(rid=main.rid, name=name)
 
 
 def rep(data: dict[Pages, bytes]) -> LobRep:
+    # Improvements:
+    # Make if statement more concise.
     main = data["main"][0]
     html_content = data['main'][1].decode('utf-8')
     soup = BeautifulSoup(html_content, 'html.parser')
     h3_tag = soup.find("h3", class_="h4 brdr-bttm", string=re.compile("Client representative"))
-    if h3_tag and h3_tag.find_next_sibling("p"):
-        name = h3_tag.find_next_sibling("p").get_text(strip=True)
-        name = name.replace('\\r\\n', ' ').strip()
-    else:
-        name = "Not found"
+    name = h3_tag.find_next_sibling("p").get_text(strip=True).replace('\\r\\n', ' ').strip() if h3_tag and h3_tag.find_next_sibling("p") else "Not found"
     return LobRep(rid=main.rid, name=name)
 
 
@@ -87,6 +70,9 @@ def fund(data: dict[Pages, bytes]) -> list[LobFund]:
     #The html example I'm running with doesn't have any funding yet tho
     #have to use another one to test
     #Changed source to source1 because it was giving me issues in terminal
+
+    # Improvements:
+    # Code simplification
     main = data["main"][0]
     html_content = data['main'][1].decode('utf-8')
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -95,13 +81,9 @@ def fund(data: dict[Pages, bytes]) -> list[LobFund]:
     if table:
         for row in table.find_all("tr")[1:]:
             columns = row.find_all("td")
-            source1 = columns[0].get_text(strip=True)
-            source1 = source1.replace('\\r\\n', ' ').strip()
-            amount = columns[1].get_text(strip=True)
-            amount = amount.replace('\\r\\n', ' ').strip()
-            amount = float(amount.replace("$", "").replace(",", ""))
-            print(f"Source: {source1}, Amount: {amount}")
-            funds_list.append(LobFund(rid=main.rid, source=source1, amount=amount))
+            source = columns[0].get_text(strip=True).replace('\\r\\n', ' ').strip()
+            amount = float(columns[1].get_text(strip=True).replace('\\r\\n', ' ').strip().replace("$", "").replace(",", ""))
+            funds_list.append(LobFund(rid=main.rid, source=source, amount=amount))
     else:
         print("Table not found")
         funds_list.append(LobFund(rid=main.rid, source="NA", amount=0.0))
@@ -134,15 +116,13 @@ def affiliate(data: dict[Pages, bytes]) -> list[LobAffiliate]:
 def lobbyist(data: dict[Pages, bytes]) -> list[LobLobbyist]:
     #Right now, "name" will return the full name, a bunch of space and then their position. i.e. "HUW WILLIAMS,                                                               Consultant"
     #Keeping it for now
+
+    # Improvements:
+    # Simplify regex matches. 
     main = data["main"][0]
     html_content = data['main'][1].decode('utf-8')
-    match = re.search(r'Responsible Officer Name:\\r\\n\s*<strong>([^<]*)</strong>', html_content)
-    if not match:
-        match = re.search(r'Lobbyist name:\\r\\n\s*<strong>([^<]*)</strong>', html_content)
-    if match:
-        name = match.group(1).replace('\\r\\n', '').strip()
-    else:
-        name = "SAMPLE_NAME"
+    match = re.search(r'(Responsible Officer Name|Lobbyist name):\\r\\n\s*<strong>([^<]*)</strong>', html_content)
+    name = match.group(1).replace('\\r\\n', '').strip() if match else "SAMPLE_NAME"
     return [LobLobbyist(rid="SAMPLE", name=name)]
 
 
