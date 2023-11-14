@@ -1,0 +1,45 @@
+{
+    "url": "https://www.sasklobbyistregistry.ca/Services/SRLService.svc/rvSearch",
+    "method": "post",
+    "headers": {
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-CA,en-US;q=0.7,en;q=0.3",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "Origin": "https://www.sasklobbyistregistry.ca",
+        "Connection": "keep-alive",
+        "Referer": "https://www.sasklobbyistregistry.ca/search-the-registry/",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin"
+    },
+    "json": {
+        "EffectiveDate": [],
+        "PostedDate": [],
+        "Keywords": "",
+        "DescriptionOfLobbyingActivities": "",
+        "Lobbyists": "",
+        "ClientOrganization": "",
+        "EffectiveFromDate": "",
+        "EffectiveToDate": "",
+        "PostedFromDate": null,
+        "PostedToDate": null,
+        "MLA": [],
+        "Minister": [],
+        "GovernmentInstitution": [],
+        "SubjectMatter": [],
+        "Category": [],
+        "RegistrationStatus": [
+            "1",
+            "165790006",
+            "2",
+            "165790008"
+        ],
+        "start": 0,
+        "length": 50,
+        "draw": 1,
+        "ordercolumn": 5,
+        "orderdirection": "desc"
+    }
+}
