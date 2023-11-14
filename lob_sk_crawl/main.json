@@ -1,0 +1,20 @@
+{
+    "url": "https://www.sasklobbyistregistry.ca",
+    "method": "post",
+    "headers": {
+        "Accept": "application/json",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en",
+        "Client-Show-Status": "true",
+        "Connection": "keep-alive",
+        "Content-Type": "application/json",
+        "DNT": "1",
+        "Origin": "https://www.sasklobbyistregistry.ca",
+        "Referer": "https://www.sasklobbyistregistry.ca/search-the-registry/",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-site",
+        "X-Origin": "https://www.sasklobbyistregistry.ca",
+        "X-Referer": "https://www.sasklobbyistregistry.ca/search-the-registry/"
+    }
+}
