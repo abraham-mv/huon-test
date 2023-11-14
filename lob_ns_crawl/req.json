@@ -1,0 +1,38 @@
+{
+    "url": "https://novascotia.ca/sns/Lobbyist/search.asp",
+    "method": "get",
+    "cookies": {
+        "_ga_Z4DW64DX8K": "GS1.1.1694619406.2.0.1694619406.60.0.0",
+        "ASPSESSIONIDCATQDTDA": "EBPPJIOADDHABGKPDNAEOCJF",
+        "__utma": "23460005.223065533.1694613777.1695233318.1695233318.1",
+        "__utmc": "23460005",
+        "__utmz": "23460005.1695233318.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)",
+        "_ga": "GA1.2.223065533.1694613777",
+        "_gid": "GA1.2.87642613.1695233318",
+        "_gat_UA-61894076-1": "1",
+        "TS01514ef8": "012df0be5f3ea3d272b8095c5621f56bc7b72689aa5bd64e88835a05a3d21dd3caf92020f567bad1ef33b2c9c179e0a7f7821d631e0d9d3d560d743e22148d4025fead45cf",
+        "__utmt": "1",
+        "__utmb": "23460005.18.10.1695233318",
+        "_gat_UA-29074170-1": "1"
+    },
+    "headers": {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Cache-Control": "max-age=0",
+        "Connection": "keep-alive",
+        "Cookie": "_ga_Z4DW64DX8K=GS1.1.1694619406.2.0.1694619406.60.0.0; ASPSESSIONIDCATQDTDA=EBPPJIOADDHABGKPDNAEOCJF; __utma=23460005.223065533.1694613777.1695233318.1695233318.1; __utmc=23460005; __utmz=23460005.1695233318.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); _ga=GA1.2.223065533.1694613777; _gid=GA1.2.87642613.1695233318; _gat_UA-61894076-1=1; TS01514ef8=012df0be5f3ea3d272b8095c5621f56bc7b72689aa5bd64e88835a05a3d21dd3caf92020f567bad1ef33b2c9c179e0a7f7821d631e0d9d3d560d743e22148d4025fead45cf; __utmt=1; __utmb=23460005.18.10.1695233318; _gat_UA-29074170-1=1",
+        "Referer": "https://novascotia.ca/sns/Lobbyist/consultant/confirmation.asp",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-User": "?1",
+        "Upgrade-Insecure-Requests": "1",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Chromium\";v=\"116\", \"Not)A;Brand\";v=\"24\", \"Google Chrome\";v=\"116\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\""
+    },
+    "data": {
+        "docsStart": "0"
+    }
+}
