@@ -11,6 +11,7 @@ from datetime import datetime
 
 
 def meta(data: dict[Pages, bytes]) -> LobMeta:
+    breakpoint()
     main = data["result"][0]
     html_content = data['result'][1].decode('utf-8')
     soup = BeautifulSoup(html_content, 'html.parser')
